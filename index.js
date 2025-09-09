@@ -1,4 +1,4 @@
-import express from "express";
+dotenv.config();
 import path from "path";
 import userRoute from "./routes/user.routes.js";
 import blogRoute from "./routes/blog.routes.js";
@@ -7,8 +7,7 @@ import cookieParser from "cookie-parser";
 import { checkForAuthenticationCookie } from "./middlewares/auth.middleware.js";
 import { Blog } from "./models/blog.model.js";
 import dotenv from "dotenv";
-dotenv.config();
-
+import express from 'express';
 const app = express();
 const PORT = process.env.PORT || 8000;
 

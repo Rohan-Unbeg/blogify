@@ -2,8 +2,10 @@ import mongoose from 'mongoose';
 import { Blog } from './models/blog.model.js';
 import { User } from './models/user.model.js';
 import { createHmac, randomBytes } from 'crypto';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const MONGODB_URI = 'mongodb://localhost:27017/blogify';
+const MONGODB_URI = process.env.MONGODB_URI;
 
 async function generateHashedPassword(password) {
     const salt = randomBytes(16).toString();
