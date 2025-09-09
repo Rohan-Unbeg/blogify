@@ -19,9 +19,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 router.get("/add-new", (req, res) => {
-    return res.render("addBlog", {
-        user: req.user,
-    });
+    return res.render("addBlog");
 });
 
 router.get("/:id", async (req, res) => {
@@ -32,16 +30,15 @@ router.get("/:id", async (req, res) => {
         }).populate("createdBy");
         console.log(comments)
         if (!blog) {
-            return res.status(404).render("404", { user: req.user });
+            return res.status(404).render("404");
         }
         return res.render("blog", {
-            user: req.user,
             blog,
             comments,
         });
     } catch (error) {
         // Handle cases where the ID is invalid
-        return res.status(404).render("404", { user: req.user });
+        return res.status(404).render("404");
     }
 });
 
@@ -61,7 +58,6 @@ router.post("/comment/:blogId", async (req, res) => {
             blogId: req.params.blogId,
         }).populate("createdBy");
         return res.render("blog", {
-            user: req.user,
             blog,
             comments,
             error: "Comment cannot be empty.",
@@ -81,7 +77,6 @@ router.post("/", upload.single("coverImage"), async (req, res) => {
         return res.redirect(`/blog/${blog._id}`);
     } catch (error) {
         res.render("addBlog", {
-            user: req.user,
             error: "All fields are required.",
         });
     }

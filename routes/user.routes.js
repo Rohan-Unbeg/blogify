@@ -33,7 +33,8 @@ router.post("/signin", async (req, res) => {
      res.cookie("token", token).redirect("/");  
    } catch (error) {
     return res.render('signin',{
-        error:"Incorrect Email or password"
+        error:"Incorrect Email or password",
+        user: req.user
     })
    }
 });
@@ -42,5 +43,6 @@ router.post("/signin", async (req, res) => {
 router.get('/logout', (req, res)=>{
     res.clearCookie('token').redirect('/')
 })
+
 
 export default router;

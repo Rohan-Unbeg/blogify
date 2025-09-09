@@ -29,7 +29,6 @@ app.get("/", async (req, res) => {
     try {
         const allBlogs = await Blog.find({}).sort({ createdAt: -1 });
         res.render("home", {
-            user: req.user,
             blogs: allBlogs,
         });
     } catch (error) {
