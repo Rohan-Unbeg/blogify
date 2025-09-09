@@ -6,11 +6,13 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import { checkForAuthenticationCookie } from "./middlewares/auth.middleware.js";
 import { Blog } from "./models/blog.model.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
-mongoose.connect("mongodb://localhost:27017/blogify").then(() => {
+mongoose.connect(process.env.MONGODB_URI).then(() => {
     console.log("mongodb connected");
 });
 
